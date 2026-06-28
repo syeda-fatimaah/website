@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pioneer Developer — Custom Websites, Web Apps &amp; Mobile Apps</title>
+  <meta name="description" content="Pioneer Developer is a full-service digital agency specializing in custom websites, web applications, mobile apps, and social media growth for startups and businesses worldwide." />
+  <!-- OG Tags -->
+  <meta property="og:title" content="Pioneer Developer — Digital Solutions Agency" />
+  <meta property="og:description" content="We build digital products that scale. Custom websites, web apps, mobile apps, and social media management." />
+  <meta property="og:image" content="/og-image.png" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://faatimaah2004.com/" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Dark animated card background */
+    @keyframes cardShimmer {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .project-card {
+      background: linear-gradient(145deg, #1a1a2e, #16213e, #1e1b3a, #1a1a2e, #12122a) !important;
+      background-size: 400% 400% !important;
+      animation: cardShimmer 8s ease infinite !important;
+      border: 1px solid rgba(139,92,246,0.18) !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(139,92,246,0.08) !important;
+    }
+    .project-body h3 {
+      color: #ffffff !important;
+    }
+    .project-body p {
+      color: rgba(255,255,255,0.55) !important;
+    }
+    .tag-gray {
+      background: rgba(255,255,255,0.08) !important;
+      color: rgba(255,255,255,0.75) !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+    }
+    .tag-accent {
+      background: rgba(37,99,235,0.25) !important;
+      color: #93C5FD !important;
+      border: 1px solid rgba(37,99,235,0.35) !important;
+    }
+    .project-img-photo {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+      display: block;
+    }
+    .project-img-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+    .project-card:hover .project-img-photo img {
+      transform: scale(1.04);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Pioneer Developer Home">
+      <span class="nav-logo-text">Pioneer Developer</span>
+      <span class="nav-logo-sub">Where Technical Precision Meets Digital Scale</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="https://www.fiverr.com/faatimaah2004" target="_blank" rel="noopener" class="btn btn-fiverr btn-sm">
+        <i class="fa-solid fa-briefcase" aria-hidden="true"></i> Hire on Fiverr
+      </a>
+      <a href="contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
+    </div>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="nav-mobile" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+  <a href="index.html" class="active" data-page="index.html">Home <i class="fa-solid fa-chevron-right"></i></a>
+  <a href="services.html" data-page="services.html">Services <i class="fa-solid fa-chevron-right"></i></a>
+  <a href="portfolio.html" data-page="portfolio.html">Portfolio <i class="fa-solid fa-chevron-right"></i></a>
+  <a href="about.html" data-page="about.html">About <i class="fa-solid fa-chevron-right"></i></a>
+  <a href="blog.html" data-page="blog.html">Blog <i class="fa-solid fa-chevron-right"></i></a>
+  <a href="contact.html" data-page="contact.html">Contact <i class="fa-solid fa-chevron-right"></i></a>
+  <div class="mobile-cta-row">
+    <a href="https://www.fiverr.com/faatimaah2004" target="_blank" rel="noopener" class="btn btn-fiverr btn-sm">Hire on Fiverr</a>
+    <a href="contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
+  </div>
+</div>
+
+<main>
+
+<!-- ============================================================
+     SECTION 1 — HERO
+     ============================================================ -->
+<section id="hero" class="relative flex min-h-[calc(100vh-68px)] items-center overflow-hidden bg-[linear-gradient(135deg,#07142C_0%,#0A2A62_100%)]">
+  <div class="pointer-events-none absolute inset-0">
+    <div class="absolute left-[-120px] top-[20px] h-[280px] w-[280px] rounded-full bg-blue-500/10 blur-3xl"></div>
+    <div class="absolute right-[-80px] top-[10px] h-[320px] w-[320px] rounded-full bg-cyan-400/10 blur-3xl"></div>
+  </div>
+
+  <div class="mx-auto w-full max-w-7xl px-6 py-12 sm:px-8 lg:px-10 lg:py-16">
+    <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-14 xl:grid-cols-[minmax(0,1fr)_minmax(0,600px)]">
+      <div class="relative z-[1] w-full max-w-2xl">
+      <div class="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white/85 shadow-[0_10px_30px_rgba(2,8,23,0.15)] backdrop-blur">
+        <span class="inline-block h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_0_6px_rgba(52,211,153,0.15)]"></span>
+        <span>Now Accepting New Clients — 2026</span>
+      </div>
+
+      <h1 class="mb-6 max-w-[12ch] text-5xl font-extrabold leading-[0.96] tracking-[-0.04em] text-white sm:text-6xl lg:text-[4rem]">
+        We Build Digital Products
+        <span class="block text-[#60A5FA]">That Scale</span>
+      </h1>
+
+      <p class="mb-10 max-w-[33ch] text-lg leading-8 text-white/78 sm:text-[1.17rem]">
+        Pioneer Developer builds modern websites, web apps, and mobile experiences with a cleaner look, stronger usability, and better business focus.
+      </p>
+
+      <div class="mb-8 flex flex-wrap gap-4">
+        <a href="contact.html" class="inline-flex items-center gap-2 rounded-xl bg-[#3B82F6] px-7 py-4 text-[15px] font-bold text-white shadow-[0_18px_40px_rgba(59,130,246,0.35)] transition hover:bg-[#2563EB]">
+          Start Your Project
+          <i class="fa-solid fa-arrow-right text-sm" aria-hidden="true"></i>
+        </a>
+        <a href="portfolio.html" class="inline-flex items-center rounded-xl border border-white/25 bg-transparent px-7 py-4 text-[15px] font-bold text-white transition hover:border-white/40 hover:bg-white/5">
+          View Our Work
+        </a>
+      </div>
+
+
+    </div>
+
+    <div class="relative mt-8 w-full max-w-[620px] sm:max-w-[680px] lg:mt-0 lg:max-w-none lg:justify-self-end">
+      <!-- Floating accents -->
+      <div class="pointer-events-none absolute left-6 top-6 h-24 w-24 rounded-[1.6rem] border border-white/10 bg-white/[0.04] opacity-70 shadow-[0_22px_55px_rgba(2,8,23,0.22)] backdrop-blur"></div>
+      <div class="pointer-events-none absolute bottom-6 right-6 h-16 w-32 rounded-[1.6rem] border border-white/10 bg-white/[0.04] opacity-70 shadow-[0_22px_55px_rgba(2,8,23,0.22)] backdrop-blur"></div>
+
+      <!-- Main panel -->
+      <div class="relative rounded-[2.2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,38,79,0.92)_0%,rgba(9,24,53,0.86)_100%)] p-5 shadow-[0_40px_110px_rgba(2,8,23,0.34)] backdrop-blur-sm sm:p-6">
+        <div class="mb-5 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+            <div class="ml-3 hidden h-9 w-[210px] rounded-full bg-white/5 sm:block"></div>
+          </div>
+          <span class="text-xs font-semibold tracking-wide text-white/60">Live Preview</span>
+        </div>
+
+        <div class="rounded-[1.6rem] border border-white/10 bg-[#061427]/55 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+          <div class="mb-4 flex items-center justify-between text-[12px] font-semibold text-white/55">
+            <span class="inline-flex items-center gap-2">
+              <span class="h-2 w-2 rounded-full bg-cyan-300/90 shadow-[0_0_0_6px_rgba(34,211,238,0.12)]"></span>
+              Build Console
+            </span>
+            <span class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1">hero</span>
+          </div>
+
+          <pre class="min-h-[180px] whitespace-pre-wrap break-words rounded-[1.2rem] border border-white/10 bg-white/[0.03] p-4 font-mono text-[13px] leading-6 text-white/80 sm:min-h-[200px]">
+<code id="hero-typing-text" data-typing="$ pioneer deliver --project &quot;Your Idea&quot;&#10;✔ UI/UX + clean responsive design&#10;✔ Custom website / web app build&#10;✔ Mobile app (Flutter) if needed&#10;✔ SEO + performance optimized&#10;✔ Source code delivered + support&#10;&#10;Next step: Book a call." data-typing-speed="20"></code><span id="hero-typing-cursor" class="hero-typing-cursor text-cyan-200">▋</span></pre>
+        </div>
+
+        <div class="mt-2 grid grid-cols-3 gap-3">
+          <div class="rounded-[1.1rem] border border-white/10 bg-white/[0.03] px-4 py-3">
+            <div class="text-xs font-semibold text-white/55">Approach</div>
+            <div class="mt-1 text-lg font-extrabold text-white">Founder-Led</div>
+          </div>
+          <div class="rounded-[1.1rem] border border-white/10 bg-white/[0.03] px-4 py-3">
+            <div class="text-xs font-semibold text-white/55">Code Quality</div>
+            <div class="mt-1 text-lg font-extrabold text-white">Production-Ready</div>
+          </div>
+          <div class="rounded-[1.1rem] border border-white/10 bg-white/[0.03] px-4 py-3">
+            <div class="text-xs font-semibold text-white/55">Response Time</div>
+            <div class="mt-1 text-lg font-extrabold text-white">&lt;24hr</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2 — TRUSTED BY / MARQUEE
+     ============================================================ -->
+<section style="background:var(--bg-white); padding:60px 7%;">
+  <div style="text-align:center; margin-bottom:32px;">
+    <span class="section-label">Solutions Built Across Industries</span>
+  </div>
+
+  <div class="marquee-wrapper">
+    <div class="marquee-track">
+      <!-- First set -->
+      <span class="marquee-pill"><i class="fa-solid fa-rocket" aria-hidden="true"></i> SaaS Platforms</span>
+      <span class="marquee-pill"><i class="fa-solid fa-store" aria-hidden="true"></i> E-Commerce</span>
+      <span class="marquee-pill"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Healthcare</span>
+      <span class="marquee-pill"><i class="fa-solid fa-truck" aria-hidden="true"></i> Logistics</span>
+      <span class="marquee-pill"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> EdTech</span>
+      <span class="marquee-pill"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> FinTech</span>
+      <span class="marquee-pill"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Corporate</span>
+      <span class="marquee-pill"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Startups</span>
+      <!-- Duplicate set for seamless loop -->
+      <span class="marquee-pill"><i class="fa-solid fa-rocket" aria-hidden="true"></i> SaaS Platforms</span>
+      <span class="marquee-pill"><i class="fa-solid fa-store" aria-hidden="true"></i> E-Commerce</span>
+      <span class="marquee-pill"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Healthcare</span>
+      <span class="marquee-pill"><i class="fa-solid fa-truck" aria-hidden="true"></i> Logistics</span>
+      <span class="marquee-pill"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> EdTech</span>
+      <span class="marquee-pill"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> FinTech</span>
+      <span class="marquee-pill"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Corporate</span>
+      <span class="marquee-pill"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Startups</span>
+    </div>
+  </div>
+
+  <p style="text-align:center; margin-top:24px; font-size:14px; color:var(--text-muted);">
+    Your business could be here.&nbsp;
+    <a href="contact.html" style="color:var(--accent); font-weight:600;">Let's talk →</a>
+  </p>
+</section>
+
+<!-- ============================================================
+     SECTION 3 — WHAT WE DO
+     ============================================================ -->
+<section style="background:var(--bg-section);">
+  <div class="wwd-inner" style="display:flex; gap:80px; align-items:flex-start; max-width:1400px; margin:0 auto;">
+
+    <!-- Left -->
+    <div style="flex:1;">
+      <div class="section-header-left reveal">
+        <span class="section-label">What We Do</span>
+        <h2>End-to-End Digital Solutions</h2>
+        <p>We build end-to-end digital products — from custom websites and mobile apps to social media strategies — designed to support your business goals from day one.</p>
+      </div>
+
+      <!-- Metric cards 2x2 -->
+      <div class="grid-2" style="margin-top:40px; gap:16px; margin-bottom:0;">
+        <div class="metric-card reveal" data-delay="0">
+          <span class="metric-number">Founder-Led</span>
+          <span class="metric-label">Every Project</span>
+        </div>
+        <div class="metric-card reveal" data-delay="80">
+          <span class="metric-number">On-Time</span>
+          <span class="metric-label">Delivery</span>
+        </div>
+        <div class="metric-card reveal" data-delay="160">
+          <span class="metric-number">30-Day</span>
+          <span class="metric-label">Post-Launch</span>
+        </div>
+        <div class="metric-card reveal" data-delay="240">
+          <span class="metric-number">&lt;24hr</span>
+          <span class="metric-label">Response</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right — Service rows -->
+    <div style="flex:1;">
+      <a href="services.html" class="service-row-item reveal">
+        <div class="service-row-icon"><i class="fa-solid fa-globe" aria-hidden="true"></i></div>
+        <div class="service-row-content">
+          <span class="service-row-title">Website Development</span>
+          <span class="service-row-desc">Custom web platforms built for speed, SEO, and business performance.</span>
+        </div>
+        <i class="fa-solid fa-arrow-right service-row-arrow" aria-hidden="true"></i>
+      </a>
+      <a href="services.html" class="service-row-item reveal" data-delay="60">
+        <div class="service-row-icon"><i class="fa-brands fa-android" aria-hidden="true"></i></div>
+        <div class="service-row-content">
+          <span class="service-row-title">Android App Development</span>
+          <span class="service-row-desc">Reliable mobile applications with clean UI and robust backend integration.</span>
+        </div>
+        <i class="fa-solid fa-arrow-right service-row-arrow" aria-hidden="true"></i>
+      </a>
+      <a href="services.html" class="service-row-item reveal" data-delay="120">
+        <div class="service-row-icon"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i></div>
+        <div class="service-row-content">
+          <span class="service-row-title">Social Media Management</span>
+          <span class="service-row-desc">Content strategies that grow visibility, credibility, and customer acquisition</span>
+        </div>
+        <i class="fa-solid fa-arrow-right service-row-arrow" aria-hidden="true"></i>
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 4 — SERVICES OVERVIEW (6 cards)
+     ============================================================ -->
+<section style="background:var(--bg-white);">
+  <div class="section-header reveal">
+    <span class="section-label">Our Services</span>
+    <h2>What Pioneer Developer Builds</h2>
+    <p>Three core services. One consistent standard: precision, clean code, and a genuine focus on your business outcomes.</p>
+  </div>
+
+  <div class="grid-3" style="max-width:1400px; margin:0 auto;">
+
+    <div class="card reveal" data-delay="0">
+      <div class="card-icon"><i class="fa-solid fa-globe" aria-hidden="true"></i></div>
+      <h3>Website Development</h3>
+      <p style="font-size:14px; margin:10px 0 16px;">Custom websites designed to generate leads, build trust, and scale with your business — from landing pages to full-stack platforms.</p>
+      <ul style="font-size:13px; color:var(--text-secondary); display:flex; flex-direction:column; gap:6px; margin-bottom:20px;">
+        <li>✓ Lead-focused responsive design</li>
+        <li>✓ Full-stack development</li>
+        <li>✓ SEO &amp; performance optimized</li>
+      </ul>
+      <a href="services.html" style="font-size:13px; font-weight:600; color:var(--accent);">Learn More →</a>
+    </div>
+
+    <div class="card reveal" data-delay="80">
+      <div class="card-icon"><i class="fa-brands fa-android" aria-hidden="true"></i></div>
+      <h3>Android App Development</h3>
+      <p style="font-size:14px; margin:10px 0 16px;">Mobile apps that improve customer experience, increase engagement, and keep your users coming back.</p>
+      <ul style="font-size:13px; color:var(--text-secondary); display:flex; flex-direction:column; gap:6px; margin-bottom:20px;">
+        <li>✓ Modern, intuitive UI/UX</li>
+        <li>✓ API &amp; backend integration</li>
+        <li>✓ Source code delivery</li>
+      </ul>
+      <a href="services.html" style="font-size:13px; font-weight:600; color:var(--accent);">Learn More →</a>
+    </div>
+
+    <div class="card reveal" data-delay="160">
+      <div class="card-icon"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i></div>
+      <h3>Social Media Management</h3>
+      <p style="font-size:14px; margin:10px 0 16px;">Content strategies that build brand authority, grow your audience, and turn followers into paying customers.</p>
+      <ul style="font-size:13px; color:var(--text-secondary); display:flex; flex-direction:column; gap:6px; margin-bottom:20px;">
+        <li>✓ Platform setup &amp; optimization</li>
+        <li>✓ Custom graphics &amp; content</li>
+        <li>✓ Analytics-driven strategy</li>
+      </ul>
+      <a href="services.html" style="font-size:13px; font-weight:600; color:var(--accent);">Learn More →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5 — HOW IT WORKS
+     ============================================================ -->
+<section id="how-it-works" style="background:var(--bg-section);">
+  <div class="section-header reveal">
+    <span class="section-label">Process</span>
+    <h2>From Idea to Launch in 4 Steps</h2>
+    <p>A clear, structured process means no surprises — just consistent, high-quality results delivered on time.</p>
+  </div>
+
+  <div class="steps-row" style="max-width:1100px; margin:0 auto;">
+    <div class="step-item reveal" data-delay="0">
+      <div class="step-number">1</div>
+      <h3>Discovery</h3>
+      <p>Share your project goals, requirements, and vision. We ask the right questions to understand your business and target audience.</p>
+    </div>
+    <div class="step-item reveal" data-delay="100">
+      <div class="step-number">2</div>
+      <h3>Proposal</h3>
+      <p>Receive a clear scope, timeline, and price — no hidden fees. You approve everything before a single line of code is written.</p>
+    </div>
+    <div class="step-item reveal" data-delay="200">
+      <div class="step-number">3</div>
+      <h3>Build</h3>
+      <p>We develop with weekly updates and full transparency. You get progress reports and can provide feedback throughout.</p>
+    </div>
+    <div class="step-item reveal" data-delay="300">
+      <div class="step-number">4</div>
+      <h3>Launch</h3>
+      <p>Delivery, comprehensive testing, handoff, and post-launch support — we ensure your product is stable and ready to grow.</p>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:60px;" class="reveal">
+    <a href="contact.html" style="font-size:16px; font-weight:600; color:var(--accent);">
+      Ready to start? Let's talk → </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 6 — FEATURED WORK
+     ============================================================ -->
+<section style="background:var(--bg-white);">
+  <div class="section-header reveal">
+    <span class="section-label">Portfolio</span>
+    <h2>Selected Projects</h2>
+    <p>Real products built for real clients — with measurable results.</p>
+  </div>
+
+  <div class="grid-3" style="max-width:1400px; margin:0 auto 48px;">
+
+    <!-- Carrier OS -->
+    <div class="project-card reveal" data-delay="0">
+      <a href="https://syeda-fatimaah.github.io/carrieros-landing-page/" target="_blank" rel="noopener" class="project-img-photo" aria-label="Carrier OS trucking platform hero banner">
+        <img src="images/carrier os new cover.png" alt="Carrier OS — Smart Trucking Platform" loading="lazy" />
+      </a>
+      <div class="project-body">
+        <span class="tag tag-accent">Web Application</span>
+        <h3>Carrier OS</h3>
+        <p>A smart trucking operations platform — helping fleet owners make better load decisions, track expenses, and manage verified documentation in one place.</p>
+        <div class="project-tech">
+          <span class="tag tag-gray">HTML</span>
+          <span class="tag tag-gray">CSS</span>
+          <span class="tag tag-gray">JavaScript</span>
+          <span class="tag tag-gray">Flutter</span>
+          <span class="tag tag-gray">Dart</span>
+          <span class="tag tag-gray">Firebase</span>
+        </div>
+        <div class="project-actions">
+          <a href="https://syeda-fatimaah.github.io/carrieros-landing-page/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">View Live <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZubanX -->
+    <div class="project-card reveal" data-delay="100">
+      <a href="zuban x landing page/code.html" target="_blank" rel="noopener" class="project-img-photo" aria-label="ZubanX AI Translator app">
+        <img src="zuban x landing page/zubanx new cover.png" alt="ZubanX — AI Translator App" loading="lazy" />
+      </a>
+      <div class="project-body">
+        <span class="tag tag-accent">Mobile Application</span>
+        <h3>ZubanX</h3>
+        <p>An AI translation Android app enabling real-time voice translation, OCR document scanning, and bilingual conversations across 100+ languages.</p>
+        <div class="project-tech">
+          <span class="tag tag-gray">Kotlin</span>
+          <span class="tag tag-gray">C++ NDK</span>
+          <span class="tag tag-gray">Android</span>
+          <span class="tag tag-gray">Firebase</span>
+          <span class="tag tag-gray">Room DB</span>
+          <span class="tag tag-gray">SQLite</span>
+        </div>
+        <div class="project-actions">
+          <a href="zuban x landing page/code.html" target="_blank" rel="noopener" class="btn btn-primary btn-sm">View Live <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enterprise HRMS -->
+    <div class="project-card reveal" data-delay="200">
+      <a href="hrms-landingpagee.html" target="_blank" rel="noopener" class="project-img-photo" aria-label="Enterprise HRMS">
+        <img src="images/hero image.png" alt="Enterprise HRMS — HR Management System" loading="lazy" />
+      </a>
+      <div class="project-body">
+        <span class="tag tag-accent">Web Application</span>
+        <h3>Enterprise HRMS</h3>
+        <p>A complete HR management system — automating employee records, attendance, payroll, and delivering AI-powered workforce insights for growing businesses.</p>
+        <div class="project-tech">
+          <span class="tag tag-gray">Laravel 11</span>
+          <span class="tag tag-gray">MySQL</span>
+          <span class="tag tag-gray">REST API</span>
+          <span class="tag tag-gray">Blade</span>
+          <span class="tag tag-gray">HTML</span>
+          <span class="tag tag-gray">JavaScript</span>
+        </div>
+        <div class="project-actions">
+          <a href="hrms-landingpagee.html" target="_blank" rel="noopener" class="btn btn-primary btn-sm">View Live <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;" class="reveal">
+    <a href="portfolio.html" class="btn btn-outline">View All Projects</a>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 7 — FOUNDER SPOTLIGHT (dark)
+     ============================================================ -->
+<section style="background:var(--nav-bg); padding:var(--section-pad);">
+  <div class="founder-section-inner" style="display:flex; align-items:center; gap:80px; max-width:1100px; margin:0 auto;">
+
+    <!-- Photo -->
+    <div class="founder-photo reveal" role="img" aria-label="Founder photo placeholder">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+    </div>
+
+    <!-- Content -->
+    <div style="flex:1;" class="reveal" data-delay="100">
+      <span class="section-label">Meet the Founder</span>
+      <h2 style="color:var(--white); margin-bottom:4px;">Fatima Syed</h2>
+      <p style="color:rgba(255,255,255,0.5); font-size:13px; font-weight:600; letter-spacing:0.03em; margin-bottom:16px;">Founder of Pioneer Developer &amp; Full-Stack Developer</p>
+      <p style="color:rgba(255,255,255,0.65); font-size:16px; line-height:1.75; max-width:540px; margin-bottom:20px;">
+        I'm a Computer Science graduate with real production experience — a full-stack HRMS built with Laravel &amp; MySQL, an Android app published on Google Play, and ongoing social media management for an international client. When you work with Pioneer Developer, you work directly with me, from the first conversation to final delivery.
+      </p>
+
+      <div class="skill-tags">
+        <span class="skill-tag">Laravel</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">Kotlin</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Flutter</span>
+        <span class="skill-tag">MySQL</span>
+      </div>
+
+      <a href="https://www.fiverr.com/faatimaah2004" target="_blank" rel="noopener" class="btn btn-fiverr" style="margin-top:24px;">
+        <i class="fa-solid fa-briefcase" aria-hidden="true"></i> View on Fiverr
+      </a>
+
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; padding-top:32px; border-top:1px solid rgba(255,255,255,0.1);">
+        <div>
+          <span style="font-size:28px; font-weight:800; color:var(--white); display:block; letter-spacing:-1px;">CS</span>
+          <span style="font-size:13px; color:rgba(255,255,255,0.5); font-weight:500;">Graduate</span>
+        </div>
+        <div>
+          <span style="font-size:28px; font-weight:800; color:var(--white); display:block; letter-spacing:-1px;">Full-Stack</span>
+          <span style="font-size:13px; color:rgba(255,255,255,0.5); font-weight:500;">Web &amp; Mobile Development</span>
+        </div>
+        <div>
+          <span style="font-size:28px; font-weight:800; color:var(--white); display:block; letter-spacing:-1px;">3 Gigs</span>
+          <span style="font-size:13px; color:rgba(255,255,255,0.5); font-weight:500;">Active on Fiverr</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 8 — TESTIMONIALS
+     ============================================================ -->
+<section id="testimonials" style="background:var(--bg-section);">
+  <div class="section-header reveal">
+    <span class="section-label">Testimonials</span>
+    <h2>Building Trust, One Project at a Time</h2>
+    <p>Genuine reviews matter more than curated praise. Verified client feedback will be published here as the portfolio grows.</p>
+  </div>
+
+  <div class="reveal" style="max-width:680px; margin:0 auto 48px; text-align:center; padding:0 24px;">
+    <div style="background:var(--bg-white); border:1px solid var(--border); border-radius:20px; padding:40px;">
+      <div style="font-size:36px; margin-bottom:16px;">🤝</div>
+      <h3 style="font-size:20px; font-weight:800; color:var(--text-primary); margin-bottom:12px;">Building Trust, One Project at a Time</h3>
+      <p style="font-size:15px; line-height:1.8; color:var(--text-secondary); margin-bottom:24px;">Pioneer Developer is actively growing its client portfolio. Verified client reviews will be published here as projects are completed and feedback is gathered.</p>
+      <a href="contact.html" class="btn btn-primary">
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>&nbsp; Start Your Project
+      </a>
+    </div>
+  </div>
+
+  <div style="text-align:center;" class="reveal">
+    <a href="contact.html" style="color:var(--accent); font-size:15px; font-weight:700; display:inline-flex; align-items:center; gap:6px;">
+      Have a project in mind? Let's discuss it →
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 9 — TECH STACK
+     ============================================================ -->
+<section style="background:var(--bg-white); padding:88px 2%;">
+  <div class="section-header reveal">
+    <span class="section-label">Technologies</span>
+    <h2>Technologies We Work With</h2>
+    <p>Modern, battle-tested tools — chosen for performance, scalability, and developer experience.</p>
+  </div>
+
+  <div style="max-width:1400px; margin:0 auto;" class="reveal">
+    <p class="tech-row-label">Frontend</p>
+    <div class="tech-row">
+      <span class="tech-pill"><i class="fa-brands fa-react" aria-hidden="true"></i> React</span>
+      <span class="tech-pill">Next.js</span>
+      <span class="tech-pill"><i class="fa-brands fa-html5" aria-hidden="true"></i> HTML/CSS</span>
+      <span class="tech-pill"><i class="fa-brands fa-js" aria-hidden="true"></i> JavaScript</span>
+      <span class="tech-pill">TypeScript</span>
+      <span class="tech-pill">Tailwind CSS</span>
+    </div>
+
+    <p class="tech-row-label">Backend</p>
+    <div class="tech-row">
+      <span class="tech-pill"><i class="fa-brands fa-node-js" aria-hidden="true"></i> Node.js</span>
+      <span class="tech-pill">Express</span>
+      <span class="tech-pill"><i class="fa-brands fa-php" aria-hidden="true"></i> PHP</span>
+      <span class="tech-pill">Laravel</span>
+      <span class="tech-pill">MySQL</span>
+      <span class="tech-pill">MongoDB</span>
+    </div>
+
+    <p class="tech-row-label">Mobile &amp; Tools</p>
+    <div class="tech-row">
+      <span class="tech-pill">Flutter</span>
+      <span class="tech-pill"><i class="fa-brands fa-react" aria-hidden="true"></i> React Native</span>
+      <span class="tech-pill">Kotlin</span>
+      <span class="tech-pill">Java</span>
+      <span class="tech-pill"><i class="fa-solid fa-fire" aria-hidden="true"></i> Firebase</span>
+      <span class="tech-pill">Android Studio</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 10 — FAQ
+     ============================================================ -->
+<section id="faq" style="background:var(--bg-section);">
+  <div class="section-header reveal">
+    <span class="section-label">FAQ</span>
+    <h2>Common Questions</h2>
+  </div>
+
+  <div class="faq-list">
+
+    <div class="faq-item reveal" data-delay="0">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <h4>What types of projects do you take on?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></div>
+      </div>
+      <div class="faq-answer">
+        <p>We work on a wide range of digital projects including custom websites, full-stack web applications, and mobile apps for iOS and Android, as well as social media management campaigns. We specialize in projects that require technical precision and scalable architecture — whether it's a landing page or a complex SaaS platform.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal" data-delay="60">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <h4>How long does a typical project take?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></div>
+      </div>
+      <div class="faq-answer">
+        <p>Project timelines vary based on scope and complexity. A simple landing page can be completed in 3–5 business days, while a full-featured web application may take 4–8 weeks. Mobile applications typically range from 6–12 weeks. We provide a detailed timeline in every project proposal so you know exactly what to expect before we begin.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal" data-delay="120">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <h4>Do you work with international clients?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></div>
+      </div>
+      <div class="faq-answer">
+        <p>Absolutely. Pioneer Developer operates fully remotely and serves clients from the United States, United Kingdom, UAE, Canada, Australia, Europe, and beyond. All communication is handled professionally via email, video calls, and project management tools. We adapt to your time zone and communication preferences to make collaboration seamless.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal" data-delay="180">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <h4>Can I hire you directly on Fiverr?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></div>
+      </div>
+      <div class="faq-answer">
+        <p>Yes! You can find our services on Fiverr at <strong>fiverr.com/faatimaah2004</strong>. Fiverr provides a secure payment escrow, clear milestone tracking, and a dispute resolution process — making it a great option for first-time clients. For larger or ongoing projects, direct engagement is also available and often preferred.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal" data-delay="240">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <h4>What is your development process?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></div>
+      </div>
+      <div class="faq-answer">
+        <p>Our process follows four clear phases: Discovery (we understand your goals), Proposal (we define scope, timeline, and price), Build (we develop with weekly progress updates and milestone check-ins), and Launch (delivery, testing, and handoff with post-launch support). We use modern project management tools and maintain full transparency throughout every project.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal" data-delay="300">
+      <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+        <h4>Do you offer revisions and support after launch?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></div>
+      </div>
+      <div class="faq-answer">
+        <p>Yes. Every project includes a defined number of revision rounds as part of the agreed scope. After launch, we provide 30 days of post-launch support to address any bugs or minor adjustments. For ongoing maintenance, we offer monthly retainer packages. We believe in long-term relationships, not one-and-done transactions.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 11 — CTA BANNER
+     ============================================================ -->
+<section class="cta-banner">
+  <div class="reveal">
+    <span class="section-label" style="color:rgba(255,255,255,0.7);">Get Started</span>
+    <h2>Ready to Build Something That Scales?</h2>
+    <p>Tell us about your project — we respond within 24 hours.</p>
+    <div class="btn-row">
+      <a href="contact.html" class="btn btn-white">Start Your Project</a>
+      <a href="https://www.fiverr.com/faatimaah2004" target="_blank" rel="noopener" class="btn btn-fiverr">
+        <i class="fa-solid fa-briefcase" aria-hidden="true"></i> Hire on Fiverr
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-top">
+    <!-- Col 1 -->
+    <div>
+      <div class="footer-logo-text">Pioneer Developer</div>
+      <div class="footer-tagline">Where Technical Precision Meets Digital Scale</div>
+      <p class="footer-desc">A founder-led digital studio delivering custom websites, web applications, mobile apps, and social media growth for businesses worldwide.</p>
+      <a href="mailto:fatimaqasimsyed@gmail.com" style="font-size:14px; font-weight:600; color:var(--accent); display:inline-flex; align-items:center; gap:6px; margin-bottom:16px; text-decoration:none;"><i class="fa-regular fa-envelope" aria-hidden="true"></i> fatimaqasimsyed@gmail.com</a>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn" title="LinkedIn (coming soon)"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61591512537802" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+        <a href="https://github.com/syeda-fatimaah" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+        <a href="https://x.com/PioneerDevs" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/pioneer.developer/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+      </div>
+    </div>
+
+    <!-- Col 2 — Services -->
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Website Development</a></li>
+        <li><a href="services.html">Web Applications</a></li>
+        <li><a href="services.html">Mobile Apps</a></li>
+        <li><a href="services.html">Social Media</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3 — Company -->
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4 — Work With Us -->
+    <div class="footer-col">
+      <h4>Work With Us</h4>
+      <ul>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="https://www.fiverr.com/faatimaah2004" target="_blank" rel="noopener" class="fiverr-link">Hire on Fiverr ↗</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-of-service.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-divider"></div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Pioneer Developer. All rights reserved.</p>
+    <p>Built with precision.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

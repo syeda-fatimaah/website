@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ZubanX — AI Translator & Learn</title>
+<meta name="description" content="ZubanX is a powerful AI-powered translator and language learning app. Translate text, speech, and images across 100+ languages with military-grade security built in Kotlin & C++."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root {
+  --teal: #0D9488;
+  --teal-dark: #0F766E;
+  --teal-light: #CCFBF1;
+  --amber: #F59E0B;
+  --amber-light: #FEF3C7;
+  --navy: #0A1628;
+  --navy-2: #0F1F38;
+  --navy-3: #162540;
+  --slate: #334155;
+  --muted: #64748B;
+  --border: #1E3A5F;
+  --border-light: #E2E8F0;
+  --bg: #F0FDFA;
+  --white: #FFFFFF;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 4px 24px rgba(10,22,40,0.18);
+  --shadow-lg: 0 20px 60px rgba(10,22,40,0.28);
+  --shadow-xl: 0 32px 80px rgba(10,22,40,0.35);
+  --grad: linear-gradient(135deg, #0D9488 0%, #0EA5E9 100%);
+  --grad-amber: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+  --grad-soft: linear-gradient(135deg, #CCFBF1 0%, #E0F2FE 100%);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--white);color:var(--slate);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:0 5%;height:68px;display:flex;align-items:center;transition:background 0.3s,box-shadow 0.3s;background:transparent;}
+.nav.scrolled{background:rgba(10,22,40,0.96);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(255,255,255,0.06);}
+.nav-inner{display:flex;align-items:center;width:100%;max-width:1320px;margin:0 auto;gap:40px;}
+.nav-logo{display:flex;flex-direction:column;gap:1px;flex-shrink:0;}
+.nav-logo strong{font-size:20px;font-weight:800;color:var(--white);letter-spacing:-0.5px;font-family:'Plus Jakarta Sans',sans-serif;}
+.nav-logo span{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.45);}
+.nav-links{display:flex;align-items:center;gap:28px;margin-left:auto;}
+.nav-links a{font-size:14px;font-weight:500;color:rgba(255,255,255,0.7);transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-btns{display:flex;gap:10px;margin-left:24px;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:var(--radius-sm);font-size:14px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;white-space:nowrap;line-height:1;}
+.btn-ghost{background:rgba(255,255,255,0.08);color:var(--white);border-color:rgba(255,255,255,0.15);}
+.btn-ghost:hover{background:rgba(255,255,255,0.16);}
+.btn-primary{background:var(--grad);color:var(--white);border:none;box-shadow:0 4px 18px rgba(13,148,136,0.4);}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(13,148,136,0.55);}
+.btn-primary-outline{background:transparent;color:var(--teal);border-color:var(--teal);}
+.btn-primary-outline:hover{background:var(--bg);}
+.btn-amber{background:var(--grad-amber);color:var(--white);border:none;box-shadow:0 4px 18px rgba(245,158,11,0.4);}
+.btn-amber:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(245,158,11,0.55);}
+.btn-lg{padding:15px 32px;font-size:15px;border-radius:12px;}
+.btn-white{background:var(--white);color:var(--navy);border:none;}
+.btn-white:hover{background:#f1f5f9;}
+.btn-outline-white{background:transparent;color:var(--white);border-color:rgba(255,255,255,0.3);}
+.btn-outline-white:hover{background:rgba(255,255,255,0.1);}
+.nav-ham{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px;margin-left:auto;}
+.nav-ham span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all 0.25s;}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:linear-gradient(145deg,#050d1f 0%,#0a1628 40%,#0d1f3c 70%,#0a1e38 100%);display:flex;flex-direction:column;padding-top:68px;position:relative;overflow:hidden;}
+.hero-mesh{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.hero-mesh::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,0.25) 0%,transparent 65%);top:-180px;right:-100px;animation:floatOrb 12s ease-in-out infinite;}
+.hero-mesh::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(14,165,233,0.18) 0%,transparent 65%);bottom:-100px;left:-80px;animation:floatOrb 14s ease-in-out infinite reverse;}
+.hero-amber-orb{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,0.12) 0%,transparent 65%);top:60%;left:20%;animation:floatOrb 10s ease-in-out infinite 2s;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(13,148,136,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(13,148,136,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 20%,black 20%,transparent 100%);}
+.hero-inner{position:relative;z-index:2;flex:1;display:flex;align-items:center;padding:60px 5% 80px;max-width:1400px;margin:0 auto;width:100%;gap:64px;}
+.hero-left{flex:1;min-width:0;}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border-radius:999px;background:rgba(13,148,136,0.12);border:1px solid rgba(13,148,136,0.3);color:rgba(255,255,255,0.85);font-size:12px;font-weight:600;letter-spacing:0.3px;margin-bottom:28px;}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:#10B981;box-shadow:0 0 0 5px rgba(16,185,129,0.2);animation:pulse 2s infinite;}
+.hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(36px,4.5vw,62px);font-weight:800;line-height:1.06;letter-spacing:-2px;color:var(--white);margin-bottom:24px;}
+.hero h1 .grad-text{background:linear-gradient(90deg,#2DD4BF,#38BDF8,#FBBF24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-desc{font-size:17px;color:rgba(255,255,255,0.65);line-height:1.75;max-width:50ch;margin-bottom:36px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px;}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);font-size:12px;font-weight:600;}
+.hero-pill i{font-size:10px;color:rgba(255,255,255,0.35);}
+.hero-right{flex:0 0 580px;max-width:580px;position:relative;padding:28px 0;}
+.hero-img-wrap{position:relative;border-radius:24px;box-shadow:0 40px 100px rgba(0,0,0,0.55),0 0 0 1px rgba(255,255,255,0.07);animation:floatCard 7s ease-in-out infinite;}
+.hero-img-wrap img{width:100%;display:block;border-radius:24px;}
+.hero-float-badge{position:absolute;padding:12px 16px;border-radius:14px;background:rgba(10,22,40,0.92);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.14);box-shadow:0 20px 40px rgba(0,0,0,0.45);z-index:10;}
+.hero-float-badge strong{display:block;font-size:13px;font-weight:700;color:rgba(255,255,255,0.9);}
+.hero-float-badge span{display:block;font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px;}
+.hfb-teal strong{color:#2DD4BF;}
+.hfb-amber strong{color:#FBBF24;}
+.hfb-tl{top:8px;left:-24px;animation:floatCard 8s ease-in-out infinite 0.5s;}
+.hfb-br{bottom:8px;right:-24px;animation:floatCard 9s ease-in-out infinite 1.2s;}
+
+@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-30px) scale(1.04);}}
+@keyframes floatCard{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0.4);}50%{box-shadow:0 0 0 6px rgba(16,185,129,0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.93);}to{opacity:1;transform:scale(1);}}
+
+/* ── SECTIONS BASE ── */
+section{padding:96px 5%;}
+.section-inner{max-width:1320px;margin:0 auto;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--teal);margin-bottom:14px;}
+.eyebrow::before{content:'';width:18px;height:2px;background:var(--teal);border-radius:2px;}
+.section-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(28px,3vw,44px);font-weight:800;color:var(--navy);line-height:1.1;letter-spacing:-1px;margin-bottom:16px;}
+.section-desc{font-size:17px;color:var(--muted);max-width:58ch;line-height:1.75;}
+.text-center{text-align:center;}
+.text-center .section-desc{margin:0 auto;}
+.eyebrow-center{justify-content:center;}
+
+/* ── FEATURES ── */
+.features{background:var(--bg);}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px;}
+.feat-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--radius);padding:28px 24px;transition:all 0.25s;position:relative;overflow:hidden;}
+.feat-card::before{content:'';position:absolute;inset:0;background:var(--grad-soft);opacity:0;transition:opacity 0.25s;}
+.feat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
+.feat-card:hover::before{opacity:1;}
+.feat-icon{position:relative;z-index:1;width:48px;height:48px;border-radius:12px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;color:var(--teal);font-size:20px;margin-bottom:16px;transition:all 0.25s;}
+.feat-card:hover .feat-icon{background:var(--teal);color:var(--white);}
+.feat-card h3{position:relative;z-index:1;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.feat-card p{position:relative;z-index:1;font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ── STATS DARK ── */
+.stats-section{background:linear-gradient(135deg,#050d1f 0%,#0a1f35 100%);padding:80px 5%;}
+.stats-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:24px;max-width:1320px;margin:0 auto;}
+.stat-card{text-align:center;padding:32px 16px;border-radius:var(--radius);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);transition:all 0.25s;}
+.stat-card:hover{background:rgba(13,148,136,0.1);border-color:rgba(13,148,136,0.3);transform:translateY(-3px);}
+.stat-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:36px;font-weight:800;color:var(--white);display:block;letter-spacing:-1.5px;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-lbl{font-size:13px;color:rgba(255,255,255,0.45);margin-top:8px;font-weight:500;}
+
+/* ── SHOWCASE ── */
+.showcase{background:var(--white);}
+.showcase-item{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-bottom:96px;}
+.showcase-item:last-child{margin-bottom:0;}
+.showcase-item.reverse .showcase-visual{order:-1;}
+.showcase-visual{position:relative;}
+.showcase-img{border-radius:20px;overflow:hidden;box-shadow:var(--shadow-xl);}
+.showcase-img img{width:100%;display:block;}
+.showcase-badge{position:absolute;bottom:-16px;left:24px;display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;background:var(--white);border:1px solid var(--border-light);box-shadow:var(--shadow);}
+.showcase-badge i{color:var(--teal);font-size:16px;}
+.showcase-badge span{font-size:13px;font-weight:600;color:var(--navy);}
+.showcase-content .eyebrow{display:block;}
+.showcase-content h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(24px,2.5vw,36px);font-weight:800;color:var(--navy);line-height:1.15;letter-spacing:-0.8px;margin-bottom:16px;}
+.showcase-content p{font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:28px;}
+.showcase-bullets{display:flex;flex-direction:column;gap:12px;}
+.showcase-bullet{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--slate);}
+.showcase-bullet i{color:var(--teal);font-size:14px;margin-top:3px;flex-shrink:0;}
+
+/* ── MODULES ── */
+.modules{background:var(--bg);}
+.modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;}
+.mod-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--radius);padding:24px;display:flex;align-items:flex-start;gap:16px;transition:all 0.25s;}
+.mod-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:rgba(13,148,136,0.2);}
+.mod-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.mod-card h3{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.mod-card p{font-size:13px;color:var(--muted);line-height:1.55;}
+
+/* ── TECH STACK ── */
+.tech-section{background:linear-gradient(145deg,#050d1f 0%,#0a1628 100%);padding:96px 5%;}
+.tech-section .section-title{color:var(--white);}
+.tech-section .section-desc{color:rgba(255,255,255,0.55);}
+.tech-section .eyebrow{color:#2DD4BF;}
+.tech-section .eyebrow::before{background:#2DD4BF;}
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.tech-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:28px 24px;transition:all 0.25s;}
+.tech-card:hover{background:rgba(13,148,136,0.1);border-color:rgba(13,148,136,0.3);transform:translateY(-3px);}
+.tech-card-icon{width:44px;height:44px;border-radius:10px;background:rgba(13,148,136,0.15);display:flex;align-items:center;justify-content:center;color:#2DD4BF;font-size:20px;margin-bottom:16px;}
+.tech-card h3{font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.tech-card p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;}
+.tech-tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;background:rgba(13,148,136,0.15);color:#2DD4BF;font-size:11px;font-weight:600;margin-top:12px;}
+
+/* ── GALLERY ── */
+.gallery-section{background:var(--white);}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.gallery-item{position:relative;border-radius:16px;overflow:hidden;cursor:pointer;border:1px solid var(--border-light);aspect-ratio:16/10;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+.gallery-item:hover img{transform:scale(1.05);}
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.8) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;display:flex;align-items:flex-end;padding:16px;}
+.gallery-item:hover .gallery-overlay{opacity:1;}
+.gallery-overlay span{color:var(--white);font-size:13px;font-weight:600;}
+.gallery-item.large{grid-column:span 2;}
+
+/* ── CTA ── */
+.cta-section{background:linear-gradient(135deg,#050d1f 0%,#0d9488 50%,#0ea5e9 100%);padding:96px 5%;text-align:center;}
+.cta-section h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:800;color:var(--white);letter-spacing:-1.5px;margin-bottom:20px;line-height:1.1;}
+.cta-section p{font-size:18px;color:rgba(255,255,255,0.75);max-width:55ch;margin:0 auto 40px;line-height:1.7;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FIVERR ── */
+.fiverr-section{background:var(--bg);padding:80px 5%;text-align:center;}
+.fiverr-inner{max-width:640px;margin:0 auto;}
+.fiverr-icon{font-size:48px;color:#1DBF73;margin-bottom:20px;}
+.fiverr-section h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(24px,2.5vw,36px);font-weight:800;color:var(--navy);letter-spacing:-0.8px;margin-bottom:16px;}
+.fiverr-section p{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:32px;}
+.btn-fiverr{background:#1DBF73;color:var(--white);border:none;box-shadow:0 4px 16px rgba(29,191,115,0.35);}
+.btn-fiverr:hover{background:#17a062;transform:translateY(-1px);}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);padding:64px 5% 32px;}
+.footer-inner{max-width:1320px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.footer-logo{margin-bottom:16px;}
+.footer-logo strong{display:block;font-size:20px;font-weight:800;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-0.5px;}
+.footer-logo span{display:block;font-size:10px;font-weight:600;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:2px;margin-top:2px;}
+.footer-desc{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.75;margin-bottom:24px;}
+.footer-social{display:flex;gap:12px;}
+.footer-social a{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);font-size:15px;transition:all 0.2s;}
+.footer-social a:hover{background:var(--teal);color:var(--white);}
+.footer-col h4{font-size:13px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
+.footer-col ul li{margin-bottom:10px;}
+.footer-col ul li a{font-size:14px;color:rgba(255,255,255,0.45);transition:color 0.2s;}
+.footer-col ul li a:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;}
+.footer-bottom p{font-size:13px;color:rgba(255,255,255,0.3);}
+
+/* ── LIGHTBOX ── */
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.lightbox.open{opacity:1;pointer-events:all;}
+.lightbox-img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:12px;box-shadow:0 40px 80px rgba(0,0,0,0.6);}
+.lightbox-close{position:absolute;top:24px;right:24px;background:rgba(255,255,255,0.1);border:none;color:var(--white);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:background 0.2s;}
+.lightbox-close:hover{background:rgba(255,255,255,0.2);}
+
+/* ── REVEAL ── */
+.reveal,.reveal-left,.reveal-right{opacity:0;transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal{transform:translateY(28px);}
+.reveal-left{transform:translateX(-28px);}
+.reveal-right{transform:translateX(28px);}
+.reveal.visible,.reveal-left.visible,.reveal-right.visible{opacity:1;transform:none;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .features-grid{grid-template-columns:repeat(2,1fr);}
+  .stats-grid{grid-template-columns:repeat(3,1fr);}
+  .hero-right{flex:0 0 460px;max-width:460px;}
+}
+@media(max-width:900px){
+  .hero-inner{flex-direction:column;gap:48px;padding-top:48px;}
+  .hero-right{flex:unset;max-width:100%;}
+  .showcase-item,.showcase-item.reverse .showcase-visual{grid-template-columns:1fr;display:flex;flex-direction:column;}
+  .showcase-item.reverse .showcase-visual{order:unset;}
+  .tech-grid{grid-template-columns:1fr 1fr;}
+  .modules-grid{grid-template-columns:1fr 1fr;}
+  .gallery-item.large{grid-column:span 1;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:680px){
+  .nav-links,.nav-btns{display:none;}
+  .nav-ham{display:flex;}
+  .features-grid,.tech-grid,.modules-grid{grid-template-columns:1fr;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <strong>ZubanX</strong>
+      <span>AI Translator &amp; Learn</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#screens">Screens</a>
+      <a href="#tech">Technology</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-btns">
+      <a href="https://www.fiverr.com/users/faatimaah2004" target="_blank" class="btn btn-ghost">Fiverr</a>
+      <a href="#contact" class="btn btn-primary">Hire Me <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <button class="nav-ham" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-amber-orb"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Android App · Kotlin &amp; C++ · NDK Security
+      </div>
+      <h1>
+        Translate Anything.<br>
+        <span class="grad-text">Learn Every Language.</span>
+      </h1>
+      <p class="hero-desc">ZubanX is a next-generation AI translator and language learning app built with military-grade security. Speak, scan, and learn — across 100+ languages, in real time.</p>
+      <div class="hero-btns">
+        <a href="https://www.fiverr.com/users/faatimaah2004/portfolio/NmEzNmE2Yzk5MmQ3NjdlYzYzMDA0NmQy" target="_blank" class="btn btn-primary btn-lg">View on Fiverr <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="index.html" class="btn btn-ghost btn-lg">Pioneer Developer</a>
+      </div>
+      <div class="hero-pills">
+        <span class="hero-pill"><i class="fa-brands fa-android"></i> Native Android</span>
+        <span class="hero-pill"><i class="fa-solid fa-language"></i> 100+ Languages</span>
+        <span class="hero-pill"><i class="fa-solid fa-shield-halved"></i> NDK Security</span>
+        <span class="hero-pill"><i class="fa-solid fa-microphone"></i> Voice Translation</span>
+        <span class="hero-pill"><i class="fa-solid fa-camera"></i> Camera OCR</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-img-wrap">
+        <img src="hero.png" alt="ZubanX App Hero" loading="eager"/>
+      </div>
+      <div class="hero-float-badge hfb-tl">
+        <strong class="hfb-teal">100+ Languages</strong>
+        <span>Real-time AI translation</span>
+      </div>
+      <div class="hero-float-badge hfb-br">
+        <strong class="hfb-amber">C++ NDK Security</strong>
+        <span>Military-grade protection</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <span class="eyebrow eyebrow-center">What ZubanX Does</span>
+      <h2 class="section-title">Every Translation Tool You Need</h2>
+      <p class="section-desc">From voice conversations to camera text scanning, ZubanX brings AI-powered translation and smart language learning into one seamless experience.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal" style="--d:0ms">
+        <div class="feat-icon"><i class="fa-solid fa-language"></i></div>
+        <h3>AI Text Translation</h3>
+        <p>Instant, expert-level translation across 100+ languages with multiple quality modes and dialect support.</p>
+      </div>
+      <div class="feat-card reveal" style="--d:80ms">
+        <div class="feat-icon"><i class="fa-solid fa-microphone-lines"></i></div>
+        <h3>Voice Translation</h3>
+        <p>Speak naturally — ZubanX transcribes, translates, and reads back in the target language with correct pronunciation.</p>
+      </div>
+      <div class="feat-card reveal" style="--d:160ms">
+        <div class="feat-icon"><i class="fa-solid fa-comments"></i></div>
+        <h3>Two-Way Converse</h3>
+        <p>Hold live bilingual conversations. Each speaker gets their own panel — perfect for travel and business meetings.</p>
+      </div>
+      <div class="feat-card reveal" style="--d:240ms">
+        <div class="feat-icon"><i class="fa-solid fa-camera"></i></div>
+        <h3>Camera OCR</h3>
+        <p>Point your camera at menus, signs, or documents to instantly translate real-world text using on-device OCR.</p>
+      </div>
+      <div class="feat-card reveal" style="--d:0ms">
+        <div class="feat-icon"><i class="fa-solid fa-book-open"></i></div>
+        <h3>Dictionary</h3>
+        <p>Look up any word with definitions, IPA phonetics, usage examples, and pronunciation audio.</p>
+      </div>
+      <div class="feat-card reveal" style="--d:80ms">
+        <div class="feat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <h3>Learn Mode</h3>
+        <p>Gamified lessons covering Phrases, Idioms, Stories, Vocab, and Word Guess — progress through 15 levels each.</p>
+      </div>
+      <div class="feat-card reveal" style="--d:160ms">
+        <div class="feat-icon"><i class="fa-solid fa-star"></i></div>
+        <h3>Saved Translations</h3>
+        <p>Bookmark favourites and revisit recent translations. Organize into custom collections like Travel or Business.</p>
+      </div>
+      <div class="feat-card reveal" style="--d:240ms">
+        <div class="feat-icon"><i class="fa-solid fa-display"></i></div>
+        <h3>On-Screen Translator</h3>
+        <p>A floating overlay that translates text inside any app — works system-wide without switching apps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-card reveal">
+      <span class="stat-num" data-target="100">0</span>
+      <span class="stat-lbl">Languages Supported</span>
+    </div>
+    <div class="stat-card reveal" style="--d:60ms">
+      <span class="stat-num" data-target="5">0</span>
+      <span class="stat-lbl">App Screens</span>
+    </div>
+    <div class="stat-card reveal" style="--d:120ms">
+      <span class="stat-num" data-target="15">0</span>
+      <span class="stat-lbl">Learn Levels Per Module</span>
+    </div>
+    <div class="stat-card reveal" style="--d:180ms">
+      <span class="stat-num" data-target="3">0</span>
+      <span class="stat-lbl">Translation Modes</span>
+    </div>
+    <div class="stat-card reveal" style="--d:240ms">
+      <span class="stat-num" data-target="5">0</span>
+      <span class="stat-lbl">Learn Categories</span>
+    </div>
+    <div class="stat-card reveal" style="--d:300ms">
+      <span class="stat-num" data-target="256">0</span>
+      <span class="stat-lbl">Bit NDK Encryption</span>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE / SCREENS -->
+<section class="showcase" id="screens">
+  <div class="section-inner">
+
+    <!-- Screen 1: Translate -->
+    <div class="showcase-item">
+      <div class="showcase-visual reveal-left">
+        <div class="showcase-img">
+          <img src="screen4.png" alt="ZubanX Translation Screen" loading="lazy"/>
+        </div>
+        <div class="showcase-badge">
+          <i class="fa-solid fa-bolt-lightning"></i>
+          <span>Instant expert translation</span>
+        </div>
+      </div>
+      <div class="showcase-content reveal-right">
+        <span class="eyebrow">Core Feature</span>
+        <h3>Translate Anything — Text, Voice & Camera</h3>
+        <p>ZubanX's main translate screen handles typed text, spoken words, and scanned images. Switch between Expert, ERT-OSS, and Beepbook modes to control quality and speed. Copy, listen, save, or share any result in one tap.</p>
+        <div class="showcase-bullets">
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Multiple translation quality modes</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Voice input with live transcription</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> One-tap Copy, Listen, Save & Share</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> On-screen floating translator overlay</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 2: Converse -->
+    <div class="showcase-item reverse">
+      <div class="showcase-content reveal-left">
+        <span class="eyebrow">Two-Way Mode</span>
+        <h3>Live Bilingual Conversations, Face to Face</h3>
+        <p>The Converse screen splits into two panels — one per speaker. Each person taps their microphone, speaks naturally, and hears the translation instantly. Ideal for travel, customer service, or cross-language teamwork.</p>
+        <div class="showcase-bullets">
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Split-screen Speaker A &amp; Speaker B layout</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Real-time bidirectional speech recognition</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Animated waveform feedback on each tap</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Clear conversation history in one button</div>
+        </div>
+      </div>
+      <div class="showcase-visual reveal-right">
+        <div class="showcase-img">
+          <img src="screen1.png" alt="ZubanX Converse Screen" loading="lazy"/>
+        </div>
+        <div class="showcase-badge">
+          <i class="fa-solid fa-arrows-left-right"></i>
+          <span>English ⇌ German live</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 3: Dictionary -->
+    <div class="showcase-item">
+      <div class="showcase-visual reveal-left">
+        <div class="showcase-img">
+          <img src="screen6.png" alt="ZubanX Dictionary Screen" loading="lazy"/>
+        </div>
+        <div class="showcase-badge">
+          <i class="fa-solid fa-search"></i>
+          <span>IPA phonetics included</span>
+        </div>
+      </div>
+      <div class="showcase-content reveal-right">
+        <span class="eyebrow">Dictionary</span>
+        <h3>Look Up Any Word With Full Context</h3>
+        <p>Not just a definition — ZubanX's dictionary gives you IPA pronunciation for both US and UK variants, part-of-speech labels, usage examples, and recent lookup history with voice search support.</p>
+        <div class="showcase-bullets">
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> IPA phonetics for US and UK pronunciation</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Recent lookups with quick re-access</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Voice-powered word search</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Usage context and part-of-speech tagging</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 4: Learn -->
+    <div class="showcase-item reverse">
+      <div class="showcase-content reveal-left">
+        <span class="eyebrow">Learn Mode</span>
+        <h3>Five Gamified Modules, 15 Levels Each</h3>
+        <p>ZubanX's Learn tab goes beyond flashcards. Progress through Phrases, Idioms, Stories, Vocab, and Word Guess — each with 15 escalating levels from Easy to Expert. Track your streak and climb the difficulty ladder.</p>
+        <div class="showcase-bullets">
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Phrases, Idioms, Stories, Vocab & Word Guess</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> 15 progressive difficulty levels per module</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> EASY / MEDIUM / HARD / EXPERT badges</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Visual progress bars with streak tracking</div>
+        </div>
+      </div>
+      <div class="showcase-visual reveal-right">
+        <div class="showcase-img">
+          <img src="screen2.png" alt="ZubanX Learn Screen" loading="lazy"/>
+        </div>
+        <div class="showcase-badge">
+          <i class="fa-solid fa-trophy"></i>
+          <span>Level up your language</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 5: Saved -->
+    <div class="showcase-item">
+      <div class="showcase-visual reveal-left">
+        <div class="showcase-img">
+          <img src="screen5.png" alt="ZubanX Saved Screen" loading="lazy"/>
+        </div>
+        <div class="showcase-badge">
+          <i class="fa-solid fa-star"></i>
+          <span>Travel &amp; Business phrasebooks</span>
+        </div>
+      </div>
+      <div class="showcase-content reveal-right">
+        <span class="eyebrow">Saved</span>
+        <h3>Your Personal Translation Library</h3>
+        <p>Every translation you save is organized into Favourites and Recents. Create custom phrasebooks — like Travel, Business Terms, or Medical — and access them offline, organized exactly how you need them.</p>
+        <div class="showcase-bullets">
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> One-tap save from any translation</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Separate Translate and Dictionary save lists</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Custom phrasebook collections</div>
+          <div class="showcase-bullet"><i class="fa-solid fa-check"></i> Offline access to saved items</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODULES / CAPABILITIES -->
+<section class="modules" id="modules">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <span class="eyebrow eyebrow-center">Full Feature Set</span>
+      <h2 class="section-title">Everything Built Into One App</h2>
+      <p class="section-desc">ZubanX ships as a complete, self-contained Android app. Every module connects seamlessly through a clean MVVM architecture.</p>
+    </div>
+    <div class="modules-grid">
+      <div class="mod-card reveal">
+        <div class="mod-icon" style="background:#CCFBF1;color:#0D9488;"><i class="fa-solid fa-language"></i></div>
+        <div><h3>Text Translator</h3><p>Expert, ERT-OSS, and Beepbook translation modes with character counter and formatting options.</p></div>
+      </div>
+      <div class="mod-card reveal" style="--d:60ms">
+        <div class="mod-icon" style="background:#FEF3C7;color:#D97706;"><i class="fa-solid fa-microphone"></i></div>
+        <div><h3>Voice Input</h3><p>Real-time speech-to-text feeding directly into the translation engine with noise filtering.</p></div>
+      </div>
+      <div class="mod-card reveal" style="--d:120ms">
+        <div class="mod-icon" style="background:#EDE9FE;color:#7C3AED;"><i class="fa-solid fa-comments"></i></div>
+        <div><h3>Converse Mode</h3><p>Face-to-face bilingual conversation with split-screen speaker panels and waveform UI.</p></div>
+      </div>
+      <div class="mod-card reveal" style="--d:0ms">
+        <div class="mod-icon" style="background:#DCFCE7;color:#16A34A;"><i class="fa-solid fa-book"></i></div>
+        <div><h3>Dictionary</h3><p>Full word lookup with IPA phonetics, definitions, usage, and history built on a curated language database.</p></div>
+      </div>
+      <div class="mod-card reveal" style="--d:60ms">
+        <div class="mod-icon" style="background:#FEE2E2;color:#DC2626;"><i class="fa-solid fa-puzzle-piece"></i></div>
+        <div><h3>Word Guess Game</h3><p>Gamified vocabulary builder. Guess the hidden word across 15 difficulty levels.</p></div>
+      </div>
+      <div class="mod-card reveal" style="--d:120ms">
+        <div class="mod-icon" style="background:#DBEAFE;color:#2563EB;"><i class="fa-solid fa-book-open-reader"></i></div>
+        <div><h3>Stories Module</h3><p>Read and translate short stories with vocabulary pop-ups for immersive language learning.</p></div>
+      </div>
+      <div class="mod-card reveal" style="--d:0ms">
+        <div class="mod-icon" style="background:#CCFBF1;color:#0D9488;"><i class="fa-solid fa-star"></i></div>
+        <div><h3>Saved &amp; Favourites</h3><p>Personal translation library with custom phrasebook collections, all available offline.</p></div>
+      </div>
+      <div class="mod-card reveal" style="--d:60ms">
+        <div class="mod-icon" style="background:#FEF3C7;color:#D97706;"><i class="fa-solid fa-camera"></i></div>
+        <div><h3>Camera OCR</h3><p>Scan menus, signs, or documents — on-device text recognition into the translate pipeline.</p></div>
+      </div>
+      <div class="mod-card reveal" style="--d:120ms">
+        <div class="mod-icon" style="background:#F0FDF4;color:#15803D;"><i class="fa-solid fa-layer-group"></i></div>
+        <div><h3>On-Screen Overlay</h3><p>A system-wide floating translator that works inside any other app without switching screens.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="tech-section" id="tech">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <span class="eyebrow eyebrow-center">Under the Hood</span>
+      <h2 class="section-title">Built With Precision Engineering</h2>
+      <p class="section-desc">ZubanX isn't just polished on the surface — its architecture, security, and tooling are production-grade from day one.</p>
+    </div>
+    <div class="tech-grid">
+
+      <div class="tech-card reveal">
+        <div class="tech-card-icon"><i class="fa-brands fa-android"></i></div>
+        <h3>Kotlin (App Language)</h3>
+        <p>The entire Android app is written in Kotlin — Google's official modern language for Android. Think of it as a cleaner, safer Java. It handles everything you see on screen: buttons, lists, animations, navigation.</p>
+        <span class="tech-tag"><i class="fa-solid fa-code"></i> Primary Language</span>
+      </div>
+
+      <div class="tech-card reveal" style="--d:60ms">
+        <div class="tech-card-icon"><i class="fa-solid fa-c"></i></div>
+        <h3>C++ (Security Engine)</h3>
+        <p>The security layer is written in C++ — a low-level language that runs extremely close to the hardware. It's used here to hide and protect sensitive data like API keys and encryption logic where Java/Kotlin can't reach.</p>
+        <span class="tech-tag"><i class="fa-solid fa-shield-halved"></i> Security Layer</span>
+      </div>
+
+      <div class="tech-card reveal" style="--d:120ms">
+        <div class="tech-card-icon"><i class="fa-solid fa-building-columns"></i></div>
+        <h3>Clean Architecture + MVVM</h3>
+        <p>The app is organized into clear layers: UI, business logic, and data — each separated so changes in one don't break the others. MVVM (Model-View-ViewModel) is the pattern that wires the UI to the data cleanly and safely.</p>
+        <span class="tech-tag"><i class="fa-solid fa-sitemap"></i> Architecture Pattern</span>
+      </div>
+
+      <div class="tech-card reveal">
+        <div class="tech-card-icon"><i class="fa-solid fa-hammer"></i></div>
+        <h3>NDK (Native Development Kit)</h3>
+        <p>NDK lets Android apps include C/C++ code alongside Kotlin. It's like giving your app a secret basement that Java code can't access — ZubanX uses it to run the security engine at the lowest possible level.</p>
+        <span class="tech-tag"><i class="fa-solid fa-microchip"></i> Native Bridge</span>
+      </div>
+
+      <div class="tech-card reveal" style="--d:60ms">
+        <div class="tech-card-icon"><i class="fa-solid fa-link"></i></div>
+        <h3>JNI (Java Native Interface)</h3>
+        <p>JNI is the bridge between Kotlin and C++. It lets the Kotlin app call functions written in C++ and get results back. Think of it as a translator between two different programming worlds.</p>
+        <span class="tech-tag"><i class="fa-solid fa-arrows-left-right"></i> Kotlin ↔ C++ Bridge</span>
+      </div>
+
+      <div class="tech-card reveal" style="--d:120ms">
+        <div class="tech-card-icon"><i class="fa-solid fa-key"></i></div>
+        <h3>String Obfuscation &amp; Caesar Cipher</h3>
+        <p>Sensitive strings like API keys are scrambled inside the C++ layer using a cipher — even if someone reverse-engineers the APK, they'll only find encrypted gibberish instead of real values. It's like a code within a code.</p>
+        <span class="tech-tag"><i class="fa-solid fa-lock"></i> Data Protection</span>
+      </div>
+
+      <div class="tech-card reveal">
+        <div class="tech-card-icon"><i class="fa-solid fa-fire"></i></div>
+        <h3>Firebase Remote Config</h3>
+        <p>Firebase Remote Config lets us change app settings — like which translation engine to use or what features to show — without publishing a new app update. The app fetches these values at launch from Google's servers.</p>
+        <span class="tech-tag"><i class="fa-solid fa-cloud"></i> Remote Configuration</span>
+      </div>
+
+      <div class="tech-card reveal" style="--d:60ms">
+        <div class="tech-card-icon"><i class="fa-solid fa-compass"></i></div>
+        <h3>Navigation Component</h3>
+        <p>Android's official Navigation Component manages all screen transitions in one central place, like a GPS for the app. It prevents crashes from double-tapping, handles back stack correctly, and keeps navigation predictable.</p>
+        <span class="tech-tag"><i class="fa-solid fa-route"></i> Screen Routing</span>
+      </div>
+
+      <div class="tech-card reveal" style="--d:120ms">
+        <div class="tech-card-icon"><i class="fa-solid fa-scroll"></i></div>
+        <h3>Timber (Logging) &amp; Material Design 3</h3>
+        <p>Timber is a smarter logging library — it only shows debug messages during development, keeping the production app clean. Material Design 3 is Google's latest design system providing the components, colors, and spacing used across the UI.</p>
+        <span class="tech-tag"><i class="fa-solid fa-palette"></i> UI System &amp; Dev Tools</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <span class="eyebrow eyebrow-center">App Screenshots</span>
+      <h2 class="section-title">See ZubanX in Action</h2>
+      <p class="section-desc">Every screen designed with Material Design 3 — dark, immersive, and built for readability across all languages.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item large reveal" onclick="openLightbox('screen3.png','All Screens Overview')">
+        <img src="screen3.png" alt="All ZubanX screens" loading="lazy"/>
+        <div class="gallery-overlay"><span><i class="fa-solid fa-expand"></i> &nbsp;All App Screens</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--d:80ms" onclick="openLightbox('hero.png','ZubanX Hero')">
+        <img src="hero.png" alt="ZubanX Hero" loading="lazy"/>
+        <div class="gallery-overlay"><span><i class="fa-solid fa-expand"></i> &nbsp;Hero Banner</span></div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox('screen4.png','Translation Screen')">
+        <img src="screen4.png" alt="Translate Screen" loading="lazy"/>
+        <div class="gallery-overlay"><span><i class="fa-solid fa-expand"></i> &nbsp;Translate Screen</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--d:80ms" onclick="openLightbox('screen1.png','Converse Screen')">
+        <img src="screen1.png" alt="Converse Screen" loading="lazy"/>
+        <div class="gallery-overlay"><span><i class="fa-solid fa-expand"></i> &nbsp;Converse Screen</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--d:160ms" onclick="openLightbox('screen6.png','Dictionary Screen')">
+        <img src="screen6.png" alt="Dictionary Screen" loading="lazy"/>
+        <div class="gallery-overlay"><span><i class="fa-solid fa-expand"></i> &nbsp;Dictionary Screen</span></div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox('screen2.png','Learn Screen')">
+        <img src="screen2.png" alt="Learn Screen" loading="lazy"/>
+        <div class="gallery-overlay"><span><i class="fa-solid fa-expand"></i> &nbsp;Learn Screen</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--d:80ms" onclick="openLightbox('screen5.png','Saved Screen')">
+        <img src="screen5.png" alt="Saved Screen" loading="lazy"/>
+        <div class="gallery-overlay"><span><i class="fa-solid fa-expand"></i> &nbsp;Saved Screen</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Need a Custom Android App Built Right?</h2>
+  <p>I design and develop production-grade Android applications — from AI tools and translators to full enterprise systems — with clean architecture, native security, and polished UI.</p>
+  <div class="cta-btns">
+    <a href="mailto:fatimaqasimsyed@gmail.com" class="btn btn-white btn-lg">Hire Me <i class="fa-solid fa-arrow-right"></i></a>
+    <a href="index.html" class="btn btn-outline-white btn-lg">View Portfolio</a>
+  </div>
+</section>
+
+<!-- FIVERR -->
+<section class="fiverr-section">
+  <div class="fiverr-inner reveal">
+    <div class="fiverr-icon"><i class="fa-brands fa-fiverr"></i></div>
+    <h2>Work With Me on Fiverr</h2>
+    <p>Need a custom Android app, AI-powered translator, language learning tool, or any mobile solution? Hire me on Fiverr for professional Android development tailored to your product vision.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://www.fiverr.com/users/faatimaah2004/portfolio/NmEzNmE2Yzk5MmQ3NjdlYzYzMDA0NmQy" target="_blank" rel="noopener" class="btn btn-fiverr btn-lg"><i class="fa-brands fa-fiverr"></i> View on Fiverr</a>
+      <a href="index.html" class="btn btn-primary-outline btn-lg">Visit Pioneer Developer</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <strong>Pioneer Developer</strong>
+          <span>Where Technical Precision Meets Digital Scale</span>
+        </div>
+        <p class="footer-desc">Building enterprise-grade Android applications, AI tools, and digital solutions for organizations worldwide.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.fiverr.com/users/faatimaah2004" aria-label="Fiverr"><i class="fa-brands fa-fiverr"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#screens">Screens</a></li>
+          <li><a href="#tech">Technology</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Android Development</a></li>
+          <li><a href="#">AI Mobile Apps</a></li>
+          <li><a href="#">NDK / C++ Security</a></li>
+          <li><a href="#">UI / UX Design</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="https://www.fiverr.com/users/faatimaah2004">Fiverr Profile</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Pioneer Developer. All Rights Reserved.</p>
+      <p>Crafted with precision and passion.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt=""/>
+</div>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 30);
+}, { passive: true });
+
+// Reveal on scroll
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const delay = e.target.style.getPropertyValue('--d') || '0ms';
+      setTimeout(() => e.target.classList.add('visible'), parseInt(delay) || 0);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+revealEls.forEach(el => io.observe(el));
+
+// Counter animation
+const counters = document.querySelectorAll('[data-target]');
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.target);
+      let current = 0;
+      const step = Math.ceil(target / 60);
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = current + (current >= target ? '+' : '');
+        if (current >= target) clearInterval(timer);
+      }, 24);
+      counterObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(el => counterObs.observe(el));
+
+// Lightbox
+function openLightbox(src, alt) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightboxImg').alt = alt;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>

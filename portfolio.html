@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Pioneer Developer | Projects &amp; Case Studies</title>
+  <meta name="description" content="Explore Pioneer Developer's portfolio of custom websites, web applications, mobile apps, and design systems — built for clients worldwide." />
+  <meta property="og:title" content="Portfolio — Pioneer Developer" />
+  <meta property="og:description" content="Real projects built with precision — websites, web apps, mobile apps, and more." />
+  <meta property="og:image" content="/og-image.png" />
+  <link rel="canonical" href="https://faatimaah2004.com/portfolio.html" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Dark animated card background */
+    @keyframes cardShimmer {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .project-card {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 20px rgba(10, 42, 98, 0.08) !important;
+      animation: none !important;
+    }
+    .project-body h3 {
+      color: #0E1A31 !important;
+    }
+    .project-body p {
+      color: #4F5F77 !important;
+    }
+    .tag-gray {
+      background: #EDF2F8 !important;
+      color: #4F5F77 !important;
+      border: 1px solid #D8E1EC !important;
+    }
+    .tag-accent {
+      background: #EAF2FF !important;
+      color: #2563EB !important;
+      border: 1px solid rgba(37,99,235,0.2) !important;
+    }
+    /* Photo-style project image thumbnail */
+    .project-img-photo {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+      display: block;
+    }
+    .project-img-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+    .project-card:hover .project-img-photo img {
+      transform: scale(1.04);
+    }
+    /* HRMS branded hero banner */
+    .project-img-hrms {
+      height: 220px;
+      background: linear-gradient(145deg, #dfe1e4 0%, #4d607d 40%, #0d1f3c 70%, #0f1635 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-img-hrms::before {
+      content: '';
+      position: absolute;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,235,0.28) 0%, transparent 65%);
+      top: -80px; right: -60px;
+    }
+    .project-img-hrms::after {
+      content: '';
+      position: absolute;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,0.22) 0%, transparent 65%);
+      bottom: -60px; left: -40px;
+    }
+    .project-img-hrms-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+    }
+    .project-img-hrms-inner .hero-badge-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.8);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
+    }
+    .project-img-hrms-inner .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 0 4px rgba(16,185,129,0.2);
+      animation: hrmsPulse 2s infinite;
+    }
+    @keyframes hrmsPulse {
+      0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0.4);}
+      50%{box-shadow:0 0 0 6px rgba(16,185,129,0);}
+    }
+    .project-img-hrms-inner h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .project-img-hrms-inner h4 span {
+      background: linear-gradient(90deg, #60A5FA, #A78BFA, #34D399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .project-img-hrms-inner p {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+    }
+    .hrms-pills {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .hrms-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.65);
+      font-size: 10px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Pioneer Developer Home">
+      <span class="nav-logo-text">Pioneer Developer</span>
+      <span class="nav-logo-sub">Where Technical Precision Meets Digital Scale</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://www.fiverr.com/faatimaah2004" target="_blank" rel="noopener" class="btn btn-fiverr btn-sm"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Hire on Fiverr</a>
+      <a href="contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile" id="mobile-menu">
+  <a href="index.html" data-page="index.html">Home <i class="fa-solid fa-chevron-right"></i></a>
+  <a href="services.html" data-page="services.html">Services <i class="fa-solid fa-chevron-right"></i></a>
+  <a href="portfolio.html" class="active" data-page="portfolio.html">Portfolio <i class="fa-solid fa-chevron-right"></i></a>
+  <a href="about.html" data-page="about.html">About <i class="fa-solid fa-chevron-right"></i></a>
+  <a href="blog.html" data-page="blog.html">Blog <i class="fa-solid fa-chevron-right"></i></a>
+  <a href="contact.html" data-page="contact.html">Contact <i class="fa-solid fa-chevron-right"></i></a>
+  <div class="mobile-cta-row">
+    <a href="https://www.fiverr.com/faatimaah2004" target="_blank" rel="noopener" class="btn btn-fiverr btn-sm">Hire on Fiverr</a>
+    <a href="contact.html" class="btn btn-primary btn-sm">Get a Quote</a>
+  </div>
+</div>
+
+<main>
+
+<!-- HERO (mini) -->
+<header class="hero-mini">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">Home</a>
+    <span aria-hidden="true">›</span>
+    <span style="color:rgba(255,255,255,0.75);">Portfolio</span>
+  </nav>
+  <h1>Our Work</h1>
+  <p>A selection of projects delivered for clients across the globe — each built with a focus on performance, design, and measurable outcomes.</p>
+  <div class="btn-row">
+    <a href="contact.html" class="btn btn-primary">Start Your Project</a>
+    <a href="services.html" class="btn btn-outline-white">View Services</a>
+  </div>
+</header>
+
+<!-- PORTFOLIO GRID -->
+<section style="background: var(--bg-section); padding: var(--section-pad);">
+
+  <!-- Filter bar -->
+  <div style="display:flex; justify-content:center; margin-bottom:48px;">
+    <div class="filter-bar" role="navigation" aria-label="Portfolio filter" style="background:#ffffff; border:1px solid #D8E1EC; border-radius:999px; padding:5px; display:inline-flex; gap:4px;">
+      <button class="filter-btn active" data-filter="all" aria-pressed="true">All Projects</button>
+      <button class="filter-btn" data-filter="webapps" aria-pressed="false">Web Apps</button>
+      <button class="filter-btn" data-filter="mobile" aria-pressed="false">Mobile Apps</button>
+    </div>
+  </div>
+
+  <div class="grid-3 reveal" style="max-width:1400px; margin:0 auto;" id="portfolio-grid">
+
+    <!-- Carrier OS -->
+    <article class="project-card" data-category="webapps">
+      <a href="https://syeda-fatimaah.github.io/carrieros-landing-page/" target="_blank" rel="noopener" class="project-img-photo" aria-label="Carrier OS trucking platform hero banner">
+        <img src="images/carrier os new cover.png" alt="Carrier OS — Smart Trucking Platform" loading="lazy" />
+      </a>
+      <div class="project-body">
+        <span class="tag tag-accent">Web Application</span>
+        <h3>Carrier OS</h3>
+        <p>A smart trucking operations platform — helping fleet owners make better load decisions, track expenses, and manage verified documentation in one place.</p>
+        <ul style="font-size:12px; color:#4F5F77; margin:8px 0 14px; padding:0; list-style:none; display:flex; flex-direction:column; gap:5px;">
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Custom responsive web interface</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Real-time load management system</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Firebase backend &amp; authentication</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Flutter mobile companion app</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Document verification workflow</li>
+        </ul>
+        <div class="project-tech">
+          <span class="tag tag-gray">HTML</span>
+          <span class="tag tag-gray">CSS</span>
+          <span class="tag tag-gray">JavaScript</span>
+          <span class="tag tag-gray">Flutter</span>
+          <span class="tag tag-gray">Dart</span>
+          <span class="tag tag-gray">Firebase</span>
+        </div>
+        <div class="project-actions">
+          <a href="https://syeda-fatimaah.github.io/carrieros-landing-page/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">View Live <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ZubanX — AI Translator Mobile App -->
+    <article class="project-card" data-category="mobile">
+      <a href="zuban x landing page/code.html" target="_blank" rel="noopener" class="project-img-photo" aria-label="ZubanX AI Translator app hero banner">
+        <img src="zuban x landing page/zubanx new cover.png" alt="ZubanX — AI Translator &amp; Language Learning App" loading="lazy" />
+      </a>
+      <div class="project-body">
+        <span class="tag tag-accent">Mobile Application</span>
+        <h3>ZubanX</h3>
+        <p>An AI translation Android app enabling real-time voice translation, OCR document scanning, and bilingual conversations across 100+ languages.</p>
+        <ul style="font-size:12px; color:#4F5F77; margin:8px 0 14px; padding:0; list-style:none; display:flex; flex-direction:column; gap:5px;">
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Kotlin &amp; C++ NDK architecture</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> On-device translation engine</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> OCR document scanning</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Firebase real-time sync</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Offline-capable via Room DB</li>
+        </ul>
+        <div class="project-tech">
+          <span class="tag tag-gray">Kotlin</span>
+          <span class="tag tag-gray">C++ NDK</span>
+          <span class="tag tag-gray">Android</span>
+          <span class="tag tag-gray">Firebase</span>
+          <span class="tag tag-gray">Room DB</span>
+          <span class="tag tag-gray">SQLite</span>
+        </div>
+        <div class="project-actions">
+          <a href="zuban x landing page/code.html" target="_blank" rel="noopener" class="btn btn-primary btn-sm">View Live <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- HRMS — Enterprise HR Management System -->
+    <article class="project-card" data-category="webapps">
+      <a href="hrms-landingpagee.html" target="_blank" rel="noopener" class="project-img-photo" aria-label="Enterprise HRMS landing page hero banner">
+        <img src="images/hero image.png" alt="Enterprise HRMS — Human Resource Management System" loading="lazy" />
+      </a>
+      <div class="project-body">
+        <span class="tag tag-accent">Web Application</span>
+        <h3>Enterprise HRMS</h3>
+        <p>A complete HR management system — automating employee records, attendance, payroll, and delivering AI-powered workforce insights for growing businesses.</p>
+        <ul style="font-size:12px; color:#4F5F77; margin:8px 0 14px; padding:0; list-style:none; display:flex; flex-direction:column; gap:5px;">
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Laravel 11 + MySQL architecture</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Role-based authentication system</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Production-ready REST API</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> AI-powered attendance prediction</li>
+          <li style="display:flex; align-items:center; gap:7px;"><i class="fa-solid fa-check" style="color:#60A5FA; font-size:10px; flex-shrink:0;" aria-hidden="true"></i> Payroll &amp; reporting automation</li>
+        </ul>
+        <div class="project-tech">
+          <span class="tag tag-gray">Laravel 11</span>
+          <span class="tag tag-gray">MySQL</span>
+          <span class="tag tag-gray">REST API</span>
+          <span class="tag tag-gray">Blade</span>
+          <span class="tag tag-gray">HTML</span>
+          <span class="tag tag-gray">JavaScript</span>
+        </div>
+        <div class="project-actions">
+          <a href="hrms-landingpagee.html" target="_blank" rel="noopener" class="btn btn-primary btn-sm">View Live <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          <a href="https://github.com/syeda-fatimaah" target="_blank" rel="noopener" class="btn btn-sm" style="background:transparent; border:1px solid #D8E1EC; color:#4F5F77; display:inline-flex; align-items:center; gap:6px;">
+            <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- placeholder anchor for any internal links -->
+<span id="case-study"></span>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="reveal">
+    <span class="section-label" style="color:rgba(255,255,255,0.7);">Next Steps</span>
+    <h2>Ready to Build Something That Scales?</h2>
+    <p>Tell us about your project — we respond within 24 hours.</p>
+    <div class="btn-row">
+      <a href="contact.html" class="btn btn-white">Start Your Project</a>
+      <a href="https://www.fiverr.com/faatimaah2004" target="_blank" rel="noopener" class="btn btn-fiverr">
+        <i class="fa-solid fa-briefcase" aria-hidden="true"></i> Hire on Fiverr
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo-text">Pioneer Developer</div>
+      <div class="footer-tagline">Where Technical Precision Meets Digital Scale</div>
+      <p class="footer-desc">A founder-led digital studio delivering custom websites, web applications, mobile apps, and social media growth for businesses worldwide.</p>
+      <a href="mailto:fatimaqasimsyed@gmail.com" style="font-size:14px; font-weight:600; color:var(--accent); display:inline-flex; align-items:center; gap:6px; margin-bottom:16px; text-decoration:none;"><i class="fa-regular fa-envelope" aria-hidden="true"></i> fatimaqasimsyed@gmail.com</a>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn" title="LinkedIn (coming soon)"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61591512537802" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+        <a href="https://github.com/syeda-fatimaah" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+        <a href="https://x.com/PioneerDevs" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/pioneer.developer/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Website Development</a></li>
+        <li><a href="services.html">Web Applications</a></li>
+        <li><a href="services.html">Mobile Apps</a></li>
+        <li><a href="services.html">Social Media</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="index.html#testimonials">Testimonials</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Work With Us</h4>
+      <ul>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="https://www.fiverr.com/faatimaah2004" target="_blank" rel="noopener" class="fiverr-link">Hire on Fiverr ↗</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-of-service.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <p>© 2026 Pioneer Developer. All rights reserved.</p>
+    <p>Built with precision.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
